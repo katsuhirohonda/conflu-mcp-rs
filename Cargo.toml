@@ -1,0 +1,25 @@
+[package]
+name = "conflu-mcp-rs"
+version = "0.1.0"
+edition = "2024"
+authors = ["Katsuhiro Honda"]
+description = "Model Context Protocol (MCP) server for Confluence"
+license = "MIT"
+repository = "https://github.com/katsuhirohonda/conflu-mcp-rs"
+keywords = ["mcp", "confluence", "ai", "llm", "atlassian"]
+categories = ["api-bindings", "asynchronous"]
+
+[dependencies]
+rmcp = { version = "0.5", features = ["server", "transport-io", "macros"] }
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+schemars = "1"
+anyhow = "1"
+base64 = "0.22"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+wiremock = "0.5"
