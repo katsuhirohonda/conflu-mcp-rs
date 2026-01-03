@@ -38,6 +38,27 @@ export CONFLUENCE_API_TOKEN="your-api-token"
 2. Click "Create API token"
 3. Give it a name and copy the token
 
+### Claude Code Configuration
+
+Add this to your Claude Code MCP settings file (`~/.claude/settings.json`):
+
+```json
+{
+  "mcpServers": {
+    "confluence": {
+      "command": "/path/to/conflu-mcp-rs/target/release/conflu-mcp-rs",
+      "env": {
+        "CONFLUENCE_BASE_URL": "https://your-domain.atlassian.net",
+        "CONFLUENCE_EMAIL": "your-email@example.com",
+        "CONFLUENCE_API_TOKEN": "your-api-token"
+      }
+    }
+  }
+}
+```
+
+Replace `/path/to/conflu-mcp-rs` with the actual path to your project directory, and update the environment variables with your Confluence credentials.
+
 ## Usage
 
 Run the server:
