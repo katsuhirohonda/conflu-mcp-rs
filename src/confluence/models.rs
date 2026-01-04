@@ -24,7 +24,7 @@ pub struct Page {
     pub author_id: Option<String>,
     pub created_at: Option<String>,
     pub version: Option<Version>,
-    pub body: Option<Body>,
+    pub body: Option<PageBody>,
     #[serde(rename = "_links")]
     pub links: Option<PageLinks>,
 }
@@ -46,6 +46,11 @@ pub struct Version {
 pub struct Body {
     pub representation: String,
     pub value: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PageBody {
+    pub storage: Option<Body>,
 }
 
 #[derive(Debug, Serialize)]

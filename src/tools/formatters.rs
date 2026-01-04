@@ -15,6 +15,7 @@ pub fn format_page(page: &Page) -> String {
     let body_preview = page
         .body
         .as_ref()
+        .and_then(|b| b.storage.as_ref())
         .map(|b| {
             let preview = b.value.chars().take(200).collect::<String>();
             if b.value.len() > 200 {

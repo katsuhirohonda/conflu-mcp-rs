@@ -45,7 +45,9 @@ impl ConfluenceClient {
             anyhow::bail!("Confluence API error ({}): {}", status, error_text);
         }
 
-        let page = response.json::<Page>().await?;
+        let text = response.text().await?;
+        eprintln!("DEBUG get_page response: {}", text);
+        let page = serde_json::from_str::<Page>(&text)?;
         Ok(page)
     }
 
