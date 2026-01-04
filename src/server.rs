@@ -10,8 +10,8 @@ use rmcp::{
 
 use crate::confluence::{ConfluenceClient, CreatePageRequest, UpdatePageRequest};
 use crate::tools::{
-    format_page, format_page_created, format_page_list, format_page_updated, CreatePageParams,
-    GetPageParams, GetPagesBySpaceParams, UpdatePageParams,
+    format_page, format_page_created, format_page_updated, CreatePageParams,
+    GetPageParams, UpdatePageParams,
 };
 
 #[derive(Clone)]
@@ -46,28 +46,7 @@ impl ConfluenceServer {
         }
     }
 
-    #[tool(description = "List pages in a Confluence space. Returns a list of pages with their titles, IDs, and basic metadata.")]
-    async fn get_pages_by_space(
-        &self,
-        Parameters(params): Parameters<GetPagesBySpaceParams>,
-    ) -> Result<CallToolResult, McpError> {
-        let limit = params.limit.unwrap_or(25).min(250);
 
-        match self
-            .confluence
-            .get_pages_by_space(&params.space_id, limit)
-            .await
-        {
-            Ok(response) => {
-                let output = format_page_list(&response, &params.space_id);
-                Ok(CallToolResult::success(vec![Content::text(output)]))
-            }
-            Err(e) => Ok(CallToolResult::error(vec![Content::text(format!(
-                "Failed to get pages: {}",
-                e
-            ))])),
-        }
-    }
 
     #[tool(description = "Create a new Confluence page. Requires space ID, title, and content in Confluence storage format (HTML-like). Optionally specify a parent page ID.")]
     async fn create_page(

@@ -51,29 +51,7 @@ impl ConfluenceClient {
         Ok(page)
     }
 
-    pub async fn get_pages_by_space(&self, space_id: &str, limit: u32) -> Result<PageListResponse> {
-        let url = format!(
-            "{}/wiki/api/v2/spaces/{}/pages?limit={}&body-format=storage",
-            self.base_url, space_id, limit
-        );
 
-        let response = self
-            .client
-            .get(&url)
-            .header("Authorization", &self.auth_header)
-            .header("Accept", "application/json")
-            .send()
-            .await?;
-
-        if !response.status().is_success() {
-            let status = response.status();
-            let error_text = response.text().await.unwrap_or_default();
-            anyhow::bail!("Confluence API error ({}): {}", status, error_text);
-        }
-
-        let pages = response.json::<PageListResponse>().await?;
-        Ok(pages)
-    }
 
     pub async fn create_page(&self, request: CreatePageRequest) -> Result<Page> {
         let url = format!("{}/wiki/api/v2/pages", self.base_url);

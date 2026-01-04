@@ -1,17 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PageListResponse {
-    pub results: Vec<Page>,
-    #[serde(rename = "_links")]
-    pub links: Option<Links>,
-}
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Links {
-    pub next: Option<String>,
-}
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

@@ -1,4 +1,4 @@
-use crate::confluence::{Page, PageListResponse};
+use crate::confluence::Page;
 
 pub fn format_page(page: &Page) -> String {
     let space_id = page.space_id.as_deref().unwrap_or("Unknown");
@@ -51,31 +51,7 @@ pub fn format_page(page: &Page) -> String {
     )
 }
 
-pub fn format_page_list(response: &PageListResponse, space_id: &str) -> String {
-    if response.results.is_empty() {
-        return format!("No pages found in space {}", space_id);
-    }
 
-    let mut output = format!(
-        "Found {} page(s) in space {}:\n\n",
-        response.results.len(),
-        space_id
-    );
-
-    for page in &response.results {
-        let version_number = page.version.as_ref().map(|v| v.number).unwrap_or(0);
-        output.push_str(&format!(
-            "- **{}** (ID: {})\n  Status: {} | Version: {}\n\n",
-            page.title, page.id, page.status, version_number
-        ));
-    }
-
-    if response.links.as_ref().and_then(|l| l.next.as_ref()).is_some() {
-        output.push_str("(More pages available - use pagination to retrieve)\n");
-    }
-
-    output
-}
 
 pub fn format_page_created(page: &Page) -> String {
     let web_ui_link = page

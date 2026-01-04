@@ -6,13 +6,7 @@ pub struct GetPageParams {
     pub page_id: String,
 }
 
-#[derive(Debug, Deserialize, schemars::JsonSchema)]
-pub struct GetPagesBySpaceParams {
-    /// The space ID to retrieve pages from
-    pub space_id: String,
-    /// Maximum number of pages to return (default: 25, max: 250)
-    pub limit: Option<u32>,
-}
+
 
 #[derive(Debug, Deserialize, schemars::JsonSchema)]
 pub struct CreatePageParams {
