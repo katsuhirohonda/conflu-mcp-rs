@@ -6,7 +6,7 @@ A Model Context Protocol (MCP) server for Confluence, written in Rust.
 
 This MCP server provides simple tools for interacting with Confluence:
 
-- **Read content**: Get page details and list pages in a space
+- **Read content**: Get page details
 - **Create content**: Create new pages with title and body content
 - **Edit content**: Update existing pages with new content
 
@@ -82,13 +82,7 @@ Get a Confluence page by its ID.
 **Parameters:**
 - `page_id` (string): The page ID to retrieve
 
-### get_pages_by_space
 
-List pages in a Confluence space.
-
-**Parameters:**
-- `space_id` (string): The space ID to retrieve pages from
-- `limit` (optional number): Maximum number of pages to return (default: 25, max: 250)
 
 ### create_page
 
